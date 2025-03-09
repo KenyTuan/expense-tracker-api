@@ -18,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager  authenticationManager;
 
     @Override
+    @Transactional
     public UserRes register(RegisterReq req) {
         final boolean exists = userRepository
                 .existsByEmail(req.getEmail());
